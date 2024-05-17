@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('home/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('home/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
+    <link href="{{ asset('favicon.ico') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -50,7 +50,7 @@
                     <li><a class="nav-link scrollto" href="#simulasi">Simulasi</a></li>
                     <li><a class="nav-link scrollto" href="#cara_pengajuan">Cara Pengajuan</a></li>
                     <li><a class="nav-link scrollto" href="#faq">Faq</a></li>
-                    <li><a class="glightbox nav-link scrollto" href="{{ route('login') }}">Login</a></li>
+                    <li><a class="nav-link scrollto" href="{{ route('login') }}">Login</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -70,8 +70,8 @@
                         <h1>Peminjaman Siap Dana</h1>
                         <h2>Solusi Terbaik bagi Anda yang terkendala di masalah Finansial Anda!!</h2>
                         <div class="d-flex justify-content-center justify-content-lg-start">
-                            <a href="{{ route('register') }}" class="glightbox btn-get-started">Daftar Sekarang</a>
-                            <a href="{{ route('login') }}" class="glightbox btn-watch-video"><i
+                            <a href="{{ route('register') }}" class="btn-get-started">Daftar Sekarang</a>
+                            <a href="{{ route('login') }}" class="btn-watch-video"><i
                                     class="bi bi-play-circle"></i><span>Login</span></a>
                         </div>
                     </div>
