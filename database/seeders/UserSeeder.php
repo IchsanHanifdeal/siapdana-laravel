@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin'),
             'role' => 'admin',
+            'jaminan' => 'https://raw.githubusercontent.com/zaadevofc/zaadevofc/main/empty-profile-picture.webp'
         ]);
 
         User::create([
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
             'email' => 'User@gmail.com',
             'password' => Hash::make('user'),
             'role' => 'user',
+            'jaminan' => 'https://raw.githubusercontent.com/zaadevofc/zaadevofc/main/empty-profile-picture.webp'
         ]);
 
         User::create([
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
             'email' => 'User0@gmail.com',
             'password' => Hash::make('user'),
             'role' => 'user',
+            'jaminan' => 'https://raw.githubusercontent.com/zaadevofc/zaadevofc/main/empty-profile-picture.webp'
         ]);
     }
 }

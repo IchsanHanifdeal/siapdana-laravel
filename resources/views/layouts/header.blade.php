@@ -18,6 +18,7 @@
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
 </head>
 
@@ -57,7 +58,8 @@
                 <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
                     <ul class="app-menu list-unstyled accordion" id="menu-accordion">
                         <li class="nav-item">
-                            <a class="nav-link {{ $active === 'dashboard' ? ' active' : '' }}" href="{{ route('dashboard') }}">
+                            <a class="nav-link {{ $active === 'dashboard' ? ' active' : '' }}"
+                                href="{{ route('dashboard') }}">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -70,17 +72,38 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a><!--//nav-link-->
                         </li><!--//nav-item-->
-                        <li class="nav-item">
-                            <a class="nav-link {{ $active === 'kreditur' ? ' active' : '' }}" href="{{ route('kreditur') }}">
-                                <span class="nav-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
-                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-                                        <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-                                      </svg>
-                                </span>
-                                <span class="nav-link-text">Kreditur</span>
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
+                        @if ($role === 'admin')
+                            <li class="nav-item">
+                                <a class="nav-link {{ $active === 'kreditur' ? ' active' : '' }}"
+                                    href="{{ route('kreditur') }}">
+                                    <span class="nav-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                            <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
+                                            <path
+                                                d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-text">Kreditur</span>
+                                </a><!--//nav-link-->
+                            </li><!--//nav-item-->
+                            <li class="nav-item">
+                                <a class="nav-link {{ $active === 'cicilan' ? ' active' : '' }}"
+                                    href="{{ route('cicilan') }}">
+                                    <span class="nav-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                            <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
+                                            <path
+                                                d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-text">Cicilan</span>
+                                </a><!--//nav-link-->
+                            </li><!--//nav-item-->
+                        @endif
                     </ul><!--//app-menu-->
                 </nav><!--//app-nav-->
                 <div class="app-sidepanel-footer">

@@ -17,7 +17,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         DB::beginTransaction();
 
         try {
@@ -30,11 +31,18 @@ class RegisterController extends Controller
                 'tanggal_lahir' => 'required',
                 'pekerjaan' => 'required',
                 'alamat' => 'required',
+                'jaminan' => 'required',
             ], [
                 'username.unique' => 'Username telah digunakan',
                 'nama.unique' => 'Nama telah digunakan',
                 'no_handphone.unique' => 'No Handphone telah digunakan',
             ]);
+
+            $jaminan_path = null;
+            if ($request->file('jaminan')) {
+                $file_path = $request->file('jaminan')->store('public/jaminan');
+                $jaminan_path = str_replace('public/', '', $file_path);
+            }
 
             $user = User::create([
                 'nama' => $request->nama,
@@ -42,6 +50,7 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role ?? 'user',
+                'jaminan' => $jaminan_path,
             ]);
 
             if (!$user) {
@@ -75,6 +84,5 @@ class RegisterController extends Controller
             toastr()->error('An error occurred. Please try again later. ' . $e->getMessage());
             return redirect()->back();
         }
-        
     }
 }

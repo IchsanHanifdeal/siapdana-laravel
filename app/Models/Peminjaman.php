@@ -12,8 +12,14 @@ class Peminjaman extends Model
     protected $primaryKey = 'id_peminjaman';
     protected $fillable = ['id_user', 'jumlah', 'tenor', 'tanggal', 'validasi'];
 
-    public function users()
+    public function user() 
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function cicilan()
+    {
+        return $this->hasMany(Cicilan::class, 'id_peminjaman');
+    }
 }
+

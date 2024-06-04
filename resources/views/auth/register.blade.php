@@ -28,8 +28,13 @@
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="{{ route('index') }}"><img class="logo-icon me-2" src="{{asset('assets/images/logo.png')}}" alt="logo"></a></div>
 					<h2 class="auth-heading text-center mb-4">Daftar ke {{ config('app.name')}}</h2>
 					<div class="auth-form-container text-start mx-auto">
-						<form class="auth-form auth-signup-form" action="{{route('store.register')}}" method="POST">
+						<form class="auth-form auth-signup-form" action="{{route('store.register')}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <div class="email mb-3">
+                                <label class="custom-file-label" for="bukti_transfer">Pilih Foto Jaminan</label>
+                                <input type="file" name="jaminan" class="form-control" id="bukti_transfer" onchange="previewFile(this);" required>
+                                <img id="imagePreview" src="#" alt="Preview Foto Profil" class="img-fluid" style="display:none;" />
+                            </div>
 							<div class="email mb-3">
 								<label class="sr-only" for="signup-email">Username</label>
 								<input id="signup-name" name="username" type="text" class="form-control signup-name @error('username') is-invalid @enderror" placeholder="Username" required="required">
@@ -120,3 +125,17 @@
 </body>
 </html> 
 
+<script>
+    function previewFile(input) {
+        var file = input.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+                document.getElementById('imagePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+            input.previousElementSibling.textContent = file.name; 
+        }
+    }
+</script>

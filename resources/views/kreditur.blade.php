@@ -15,6 +15,7 @@
                             <th>Tempat/Tanggal Lahir</th>
                             <th>Pekerjaan</th>
                             <th>Alamat</th>
+                            <th>Jaminan</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -33,6 +34,31 @@
                                     <td>{{ $k->tempat . '/' . $k->tanggal_lahir }}</td>
                                     <td>{{ $k->pekerjaan }}</td>
                                     <td>{{ $k->alamat }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#modalBukti-{{ $k->id_kreditur }}">Lihat Jaminan</button> 
+                                        <div class="modal fade" id="modalBukti-{{ $k->id_kreditur }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="modalPendudukLabel"
+                                            aria-bs-hidden="true"> 
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalPendudukLabel">Lihat Jaminan
+                                                        </h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="{{ asset('storage/' . $k->jaminan) }}"
+                                                            class="img-fluid" /> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
                                     <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-hapus-{{ $k->id_kreditur }}"><i class="fas fa-trash"></i> Hapus</button>
                                     
                                          {{-- Modal Hapus --}}

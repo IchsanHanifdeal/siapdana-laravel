@@ -16,9 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('jumlah');
-            $table->string('tenor');
+            $table->integer('tenor');
             $table->date('tanggal');
             $table->enum('validasi', ['diterima', 'menunggu persetujuan', 'ditolak'])->default('menunggu persetujuan');
+            $table->enum('status', ['Lunas', 'Belum Lunas'])->nullable();
             $table->timestamps();
         });
     }

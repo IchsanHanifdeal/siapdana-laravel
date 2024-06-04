@@ -15,17 +15,18 @@ class DashboardController extends Controller
         $nama = $request->session()->get('nama');
         $id_user = $request->session()->get('id_user');
         $kreditur = Kreditur::count();
-        $peminjaman = Peminjaman::count();
+        $peminjamanCount = Peminjaman::count();
         $peminjaman_ditolak = Peminjaman::where('validasi', 'ditolak')->count();
         $peminjaman_diterima = Peminjaman::where('validasi', 'diterima')->count();
 
         if ($role == 'admin') {
+            $peminjamanList = Peminjaman::with('user')->get();
             return view('dashboard', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',
-                'peminjaman' => Peminjaman::all(),
+                'peminjamanList' => $peminjamanList,
                 'jumlah_kreditur' => $kreditur,
-                'jumlah_peminjaman' => $peminjaman,
+                'jumlah_peminjaman' => $peminjamanCount,
                 'total_peminjaman_diterima' => $peminjaman_diterima,
                 'jumlah_peminjaman_ditolak' => $peminjaman_ditolak,
                 'role' => $role,
@@ -33,10 +34,11 @@ class DashboardController extends Controller
                 'id_user' => $id_user,
             ]);
         } else {
-            $id_user = $request->session()->get('id_user');
-            $role = $request->session()->get('role');
-            $nama = $request->session()->get('nama');
-            $peminjaman = Peminjaman::where('id_user', $id_user)->get();
+            $peminjaman = Peminjaman::with(['user', 'cicilan'])
+                ->where('id_user', $id_user)
+                ->whereIn('validasi', ['diterima', 'menunggu persetujuan', 'ditolak'])
+                ->first();
+
             return view('dashboard', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',

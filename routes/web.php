@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CicilanController;
 use App\Http\Controllers\KrediturController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -35,3 +36,6 @@ Route::put('/dashboard/terima/{id_peminjaman}', [PeminjamanController::class, 't
 
 Route::get('/dashboard/kreditur', [KrediturController::class, 'index'])->name('kreditur');
 Route::delete('/dashboard/kreditur/{id_kreditur}', [KrediturController::class, 'destroy'])->name('destroy.kreditur');
+
+Route::get('/dashboard/cicilan', [CicilanController::class, 'index'])->name('cicilan');
+Route::put('/dashboard/bayar/{id_cicilan}', [PeminjamanController::class, 'bayar_cicilan'])->name('pembayaran_cicilan');

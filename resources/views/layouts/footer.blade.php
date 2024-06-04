@@ -12,6 +12,7 @@
 
 
  <!-- Javascript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
  <script src="{{ asset('assets/plugins/popper.min.js') }}"></script>
  <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
@@ -21,6 +22,7 @@
 
  <!-- Page Specific JS -->
  <script src="{{ asset('assets/js/app.js') }}"></script>
+ <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

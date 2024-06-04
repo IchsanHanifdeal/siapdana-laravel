@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cicilan;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PeminjamanController extends Controller
 {
@@ -57,11 +60,34 @@ class PeminjamanController extends Controller
      */
     public function terima(Request $request, $id_peminjaman)
     {
-        $peminjaman = Peminjaman::findOrFail($id_peminjaman);
-        $peminjaman->validasi = 'diterima';
-        $peminjaman->save();
+        DB::beginTransaction();
 
-        return back()->with('success', 'Peminjaman Diterima.');
+        try {
+            $peminjaman = Peminjaman::findOrFail($id_peminjaman);
+            $peminjaman->validasi = 'diterima';
+            $peminjaman->save();
+
+            $tenor = $peminjaman->tenor;
+            $jumlah = $peminjaman->jumlah;
+            $jumlah_angsuran = ($jumlah / $tenor) * 1.1;
+            $tanggal_jatuh_tempo = Carbon::now()->addMonth(); 
+
+            for ($i = 0; $i < $tenor; $i++) {
+                Cicilan::create([
+                    'id_peminjaman' => $id_peminjaman,
+                    'tanggal_jatuhtempo' => $tanggal_jatuh_tempo->copy()->addMonths($i),
+                    'jumlah_angsuran' => $jumlah_angsuran,
+                    'sisa_bulan' => $tenor - $i,
+                    'status' => 'belum bayar',
+                ]);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Peminjaman Diterima.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
 
@@ -80,9 +106,14 @@ class PeminjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Peminjaman $peminjaman)
+    public function bayar_cicilan(Request $request, $id_cicilan)
     {
-        //
+        $cicilan = Cicilan::findOrFail($id_cicilan);
+        $cicilan->status = 'Sudah Bayar';
+        $cicilan->tanggal_pembayaran = now();
+        $cicilan->save();
+
+        return back()->with('success', 'Cicilan Diterima.');
     }
 
     /**
