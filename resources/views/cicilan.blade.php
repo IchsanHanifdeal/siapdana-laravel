@@ -21,7 +21,7 @@
                         @foreach ($cicilan as $index => $c)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td class="text-center">{{$c->peminjaman->user->nama}}
+                                <td class="text-center">{{ $c->peminjaman->user->nama }}
                                 </td>
                                 <td class="text-center">{{ $c->tanggal_jatuhtempo }}</td>
                                 <td class="text-center">{{ $c->tanggal_pembayaran ?? '-' }}</td>
@@ -39,12 +39,11 @@
 
 @include('layouts.footer')
 
-<script>
-    $(document).ready(function() {
-        $('#example2').DataTable({
-            searching: false
+@if ($role === 'admin')
+    <script>
+        $(document).ready(function() {
+            $('#example2').DataTable({
+            });
         });
-    });
-</script>
-
-
+    </script>
+@endif

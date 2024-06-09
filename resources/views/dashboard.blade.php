@@ -409,8 +409,12 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#example2').DataTable();
-    });
-</script>
+@if ($role === 'user')
+    <script>
+        $(document).ready(function() {
+            $('#example2').DataTable({
+                searching: false
+            });
+        });
+    </script>
+@endif
