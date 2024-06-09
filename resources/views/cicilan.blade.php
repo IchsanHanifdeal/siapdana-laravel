@@ -41,7 +41,10 @@
 
 <script>
     $(document).ready(function() {
-        $('#example2').DataTable();
+        $('#example2').DataTable({
+            searching: false
+        });
     });
 </script>
+
 
