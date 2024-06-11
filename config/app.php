@@ -82,6 +82,8 @@ return [
     |
     */
 
+    'date_format' => 'dmY',
+
     'locale' => 'en',
 
     /*
